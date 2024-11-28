@@ -28,7 +28,6 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <p>Nguyễn Đắc Hiếu</p>
             </div>
         </div>
     </div>
