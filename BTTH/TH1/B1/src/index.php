@@ -4,7 +4,7 @@
 ?>
 
     <?php include "../components/Clients/header.php"?>
-    <h1 class="title_header">Danh sách các loài hoa</h1>
+    <h1 class="title_header">Danh sách các loài hoaa</h1>
     <div class="container">
         <div class="flower-list">
             <div class="row">
@@ -28,6 +28,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <p>Nguyễn Đắc Hiếu</p>
             </div>
         </div>
     </div>
