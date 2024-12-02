@@ -1,14 +1,53 @@
 <?php
 session_start();
 
-// Nếu chưa có danh sách sản phẩm, khởi tạo danh sách mặc định
-if (!isset($_SESSION['products'])) {
-    $_SESSION['products'] = [
-        ["name" => "Sản phẩm 1", "price" => "1000 VND"],
-        ["name" => "Sản phẩm 2", "price" => "2000 VND"],
-        ["name" => "Sản phẩm 3", "price" => "3000 VND"],
-    ];
-}
+class Product {
+    // Lấy tất cả sản phẩm
+    public static function getAll() {
+        return isset($_SESSION['products']) ? $_SESSION['products'] : [];
+    }
 
-$products = $_SESSION['products'];
+    // Thêm sản phẩm mới
+    public static function add($name, $price) {
+        // Lấy danh sách sản phẩm hiện tại
+        $products = self::getAll();
+
+        // Thêm sản phẩm mới vào danh sách
+        $products[] = ['name' => $name, 'price' => $price];
+
+        // Cập nhật lại session
+        $_SESSION['products'] = $products;
+    }
+
+    // Sửa thông tin sản phẩm
+    public static function edit($id, $name, $price) {
+        // Lấy danh sách sản phẩm hiện tại
+        $products = self::getAll();
+
+        // Kiểm tra nếu sản phẩm tồn tại
+        if (isset($products[$id])) {
+            // Cập nhật thông tin sản phẩm
+            $products[$id]['name'] = $name;
+            $products[$id]['price'] = $price;
+
+            // Cập nhật lại session
+            $_SESSION['products'] = $products;
+        }
+    }
+
+    // Xóa sản phẩm
+    public static function delete($id) {
+        // Lấy danh sách sản phẩm hiện tại
+        $products = self::getAll();
+
+        // Kiểm tra nếu sản phẩm tồn tại
+        if (isset($products[$id])) {
+            // Xóa sản phẩm
+            unset($products[$id]);
+
+            // Cập nhật lại danh sách sản phẩm trong session
+            $_SESSION['products'] = array_values($products); // Cập nhật lại chỉ số mảng
+        }
+    }
+}
 ?>
