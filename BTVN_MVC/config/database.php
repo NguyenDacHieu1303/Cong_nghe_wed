@@ -1,18 +1,19 @@
+
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "product_db";  // Tên CSDL của bạn
-    private $username = "root";        // Tên đăng nhập
-    private $password = "";            // Mật khẩu (trong trường hợp này là rỗng nếu bạn chưa thiết lập mật khẩu cho MySQL)
-    private $conn;
+    private $dbname = "Product_db";
+    private $username = "root"; // Đổi nếu cần
+    private $password = ""; // Đổi nếu cần
+    public $conn;
 
-    public function getConnection() {
+    public function connect() {
         $this->conn = null;
         try {
-            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->db_name}", $this->username, $this->password);
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->dbname, $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
+        } catch (PDOException $e) {
+            echo "Connection error: " . $e->getMessage();
         }
         return $this->conn;
     }
