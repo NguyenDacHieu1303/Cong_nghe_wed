@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo "Quản lý sản phẩm"; ?></title>
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- Link tới file CSS riêng -->
+    <style>
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: normal;
+        }
+        nav a:hover {
+            color: #007bff;
+        }
+        nav a strong {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>

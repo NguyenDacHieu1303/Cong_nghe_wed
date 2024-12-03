@@ -1,19 +1,3 @@
-<?php
-session_start();
-
-// Kiểm tra nếu danh sách sản phẩm chưa được khởi tạo trong session
-if (!isset($_SESSION['products'])) {
-    $_SESSION['products'] = [
-        ["name" => "Sản phẩm 1", "price" => "1000 VND"],
-        ["name" => "Sản phẩm 2", "price" => "2000 VND"],
-        ["name" => "Sản phẩm 3", "price" => "3000 VND"]
-    ];
-}
-
-// Lấy danh sách sản phẩm từ session
-$products = $_SESSION['products'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +5,37 @@ $products = $_SESSION['products'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý sản phẩm</title>
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- Đảm bảo đường dẫn chính xác -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .btn {
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
     <header>

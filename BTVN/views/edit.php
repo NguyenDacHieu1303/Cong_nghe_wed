@@ -1,4 +1,3 @@
-<!-- File: views/edit.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +12,23 @@
         <a href="index.php" class="btn">Quay lại</a>
     </header>
 
-    <form method="POST" action="index.php?action=edit&id=<?= $id ?>">
-        <label for="name">Tên sản phẩm:</label>
-        <input type="text" name="name" id="name" value="<?= htmlspecialchars($product['name']) ?>" required>
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error']); ?>
+            <?php unset($_SESSION['error']); ?>
+        </div>
+    <?php endif; ?>
 
-        <label for="price">Giá:</label>
-        <input type="text" name="price" id="price" value="<?= htmlspecialchars(str_replace(' VND', '', $product['price'])) ?>" required>
+    <form method="POST" action="index.php?action=edit&id=<?= htmlspecialchars($id) ?>">
+        <label for="name">Tên sản phẩm:</label>
+        <input type="text" name="name" id="name" 
+               value="<?= htmlspecialchars($product['name'] ?? '') ?>" 
+               required>
+
+        <label for="price">Giá (VND):</label>
+        <input type="text" name="price" id="price" 
+               value="<?= htmlspecialchars(str_replace(' VND', '', $product['price'] ?? '')) ?>" 
+               required>
 
         <button type="submit" class="btn">Lưu thay đổi</button>
     </form>
