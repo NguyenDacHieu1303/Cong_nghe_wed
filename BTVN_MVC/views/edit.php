@@ -1,21 +1,5 @@
-<?php include 'templates/header.php'; ?>
-
 <?php
-session_start();
-
-$id = $_GET['id'];
-$product = $_SESSION['products'][$id];
-
-// Loại bỏ "VND" khỏi giá trị giá tiền trước khi hiển thị trong form
-$currentPrice = str_replace(" VND", "", $product['price']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = htmlspecialchars($_POST['name']);
-    $price = htmlspecialchars($_POST['price']) . " VND"; // Thêm " VND" khi lưu lại
-    $_SESSION['products'][$id] = ["name" => $name, "price" => $price];
-    header('Location: index.php');
-    exit();
-}
+// views/edit.php
 ?>
 
 <!DOCTYPE html>
@@ -80,19 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="form-container">
         <h1>Sửa sản phẩm</h1>
-        <form method="post">
+        <form action="index.php?action=edit&id=<?= htmlspecialchars($id) ?>" method="post">
             <div class="form-group">
                 <label for="name">Tên sản phẩm</label>
                 <input type="text" name="name" id="name" value="<?= htmlspecialchars($product['name']) ?>" required>
             </div>
             <div class="form-group">
                 <label for="price">Giá thành</label>
-                <!-- Hiển thị giá trị không bao gồm "VND" -->
-                <input type="text" name="price" id="price" value="<?= htmlspecialchars($currentPrice) ?>" required>
+                <input type="text" name="price" id="price" value="<?= htmlspecialchars(str_replace(' VND', '', $product['price'])) ?>" required>
             </div>
             <button type="submit">Lưu thay đổi</button>
         </form>
     </div>
 </body>
 </html>
-

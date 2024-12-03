@@ -1,5 +1,10 @@
-<footer>
-    <p>&copy; ĐẠI HỌC THỦY LỢI </p>
+<div class="separator"></div>
+    <footer>
+        <?php
+        $footerContent = "TLU'S MUSIC GARDEN";
+        echo "<p>{$footerContent}</p>";
+        ?>
+    </footer>
     <style>
         .separator {
             height: 2px;
@@ -15,5 +20,5 @@
             font-weight: bold;
         }
     </style>
-    
-</footer>
+</body>
+</html>

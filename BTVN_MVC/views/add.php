@@ -1,27 +1,14 @@
-<?php include 'templates/header.php'; ?>
-
-<h1>Thêm mới</h1>
-<form method="POST" action="index.php?action=add">
-    <label for="name">Sản Phẩm</label>
-    <input type="text" id="name" name="name" required><br><br>
-
-    <label for="price">Giá Thành</label>
-    <input type="text" id="price" name="price" required><br><br>
-
-    <input type="submit" value="Add Product">
-</form>
 <?php
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = htmlspecialchars($_POST['name']);
-    $price = htmlspecialchars($_POST['price']) . " VND";
-    $_SESSION['products'][] = ["name" => $name, "price" => $price];
-    header('Location: index.php');
-    exit();
-}
+// views/add.php
 ?>
-<style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm</title>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -73,5 +60,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #0056b3;
         }
     </style>
-
-<?php include 'templates/footer.php'; ?>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Thêm sản phẩm</h1>
+        <form action="index.php?action=add" method="post">
+            <div class="form-group">
+                <label for="name">Tên sản phẩm</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Giá thành</label>
+                <input type="text" name="price" id="price" required>
+            </div>
+            <button type="submit">Thêm sản phẩm</button>
+        </form>
+    </div>
+</body>
+</html>

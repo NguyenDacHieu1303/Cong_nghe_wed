@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title><?php echo "Quản lý sản phẩm"; ?></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +50,7 @@
     </style>
 </head>
 <body>
-<header>
+    <header>
         <div class="header-left">
             <h1><?php echo "Administration"; ?></h1>
             <nav>

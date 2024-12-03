@@ -1,29 +1,29 @@
 <?php
-require_once 'config/database.php';
-require_once 'controllers/ProductController.php';
+require_once './controllers/ProductController.php';
 
-$database = new Database();
-$db = $database->getConnection();
+$controller = new ProductController();
 
-$controller = new ProductController($db);
+// Kiểm tra xem có tham số action hay không
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+    $id = $_GET['id'] ?? null;
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
-
-switch ($action) {
-    case 'add':
-        $controller->addProduct();
-        break;
-    case 'edit':
-        $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        $controller->editProduct($id);
-        break;
-    case 'delete':
-        $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        $controller->deleteProduct($id);
-        break;
-    case 'index':
-    default:
-        $controller->showAllProducts();
-        break;
+    switch ($action) {
+        case 'add':
+            $controller->add();
+            break;
+        case 'edit':
+            $controller->edit($id);
+            break;
+        case 'delete':
+            $controller->delete($id);
+            break;
+        default:
+            $controller->index();
+            break;
+    }
+} else {
+    // Nếu không có tham số action, gọi phương thức index()
+    $controller->index();
 }
 ?>

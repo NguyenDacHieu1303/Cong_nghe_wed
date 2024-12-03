@@ -1,27 +1,36 @@
-<?php include 'templates/header.php'; ?>
+<?php 
+include 'header.php'; 
+?>
 
-<h1>Product List</h1>
-<a href="index.php?action=add">Add New Product</a>
+<main>
+    <button class="btn-add" onclick="window.location.href='index.php?controllers=ProductController&action=add'">Thêm mới</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá thành</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $id => $product): ?>
+                <tr>
+                    <td><?= htmlspecialchars($product['name']) ?></td>
+                    <!-- Xử lý định dạng giá -->
+                    <td><?= htmlspecialchars((int)$product['price']) . " VND" ?></td>
+                    <td>
+                        <a href="index.php?controller=ProductController&action=edit&id=<?= $product['id'] ?>" class="btn-edit">✏️</a>
+                    </td>
+                    <td>
+                    <a href="index.php?controller=ProductController&action=delete&id=<?= $product['id'] ?>" class="btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">🗑️</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</main>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Actions</th>
-    </tr>
-    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-    <tr>
-        <td><?= $row['id']; ?></td>
-        <td><?= $row['name']; ?></td>
-        <td><?= $row['price']; ?></td>
-        <td>
-            <a href="index.php?action=edit&id=<?= $row['id']; ?>">Edit</a> |
-            <a href="index.php?action=delete&id=<?= $row['id']; ?>">Delete</a>
-        </td>
-    </tr>
-    <?php endwhile; ?>
-</table>
 <style>
     main {
         padding: 20px;
@@ -76,4 +85,4 @@
     }
 </style>
 
-<?php include 'templates/footer.php'; ?>
+<?php include 'footer.php'; ?>  
