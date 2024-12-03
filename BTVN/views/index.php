@@ -43,7 +43,7 @@
         <a href="index.php?action=add" class="btn">Thêm sản phẩm</a>
     </header>
 
-    <?php if (count($products) > 0): ?>
+    <?php if (isset($products) && count($products) > 0): ?>
         <table>
             <thead>
                 <tr>
