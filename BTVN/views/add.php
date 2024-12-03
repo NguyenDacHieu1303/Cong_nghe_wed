@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm sản phẩm</title>
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Liên kết tới file CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Liên kết tới file CSS -->
 </head>
 <body>
     <header>
@@ -24,6 +24,3 @@
     </form>
 </body>
 </html>
-
-
-

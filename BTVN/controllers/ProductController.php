@@ -1,6 +1,6 @@
 <?php
 // File: controllers/ProductController.php
-require_once 'models/Product.php';
+require_once 'models/ProductModel.php';
 
 class ProductController
 {
@@ -8,7 +8,7 @@ class ProductController
     public function index()
     {
         $products = Product::getAll();
-        include 'views/index.php';
+        include '../views/index.php';
     }
 
     // Thêm sản phẩm mới
@@ -31,7 +31,7 @@ class ProductController
             header('Location: index.php');
             exit();
         }
-        include 'views/add.php';
+        include '../views/add.php';
     }
 
     // Sửa thông tin sản phẩm
@@ -66,7 +66,7 @@ class ProductController
             exit();
         }
 
-        include 'views/edit.php';
+        include '../views/edit.php';
     }
 
     // Xóa sản phẩm

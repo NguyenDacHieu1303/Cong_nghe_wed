@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo "Quản lý sản phẩm"; ?></title>
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Link tới file CSS riêng -->
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Link tới file CSS riêng -->
 </head>
 <body>
     <header>
