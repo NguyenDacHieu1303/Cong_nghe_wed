@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $dbname = "Product_db";
+    private $dbname = "mvc";
     private $username = "root"; // Đổi nếu cần
     private $password = ""; // Đổi nếu cần
     public $conn;
