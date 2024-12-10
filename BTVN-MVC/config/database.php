@@ -2,8 +2,8 @@
 class Database {
     private $host = "localhost";
     private $dbname = "mvc";
-    private $username = "root"; // Đổi nếu cần
-    private $password = ""; // Đổi nếu cần
+    private $username = "root";
+    private $password = ""; 
     public $conn;
 
     public function connect() {
