@@ -2,17 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use PharIo\Manifest\Library;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
     {
-        // Gọi các Seeder để chèn dữ liệu
-        $this->call([
-            LibrariesTableSeeder::class,
-            BooksTableSeeder::class,
-        ]);
+        // User::factory(10)->create();
+
+       
     }
 }
