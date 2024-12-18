@@ -9,78 +9,42 @@ use Illuminate\Support\Facades\DB;
 
 class PostsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-{
-    $faker = Faker::create();
+    public function run()
+    {
+        $faker = Faker::create();
 
-    // Thêm 100 bản ghi vào các bảng
-    for ($i = 0; $i < 100; $i++) {
-        // Chèn vào bảng 'libraries' và lấy ID của thư viện vừa thêm
-        $libraryId = DB::table('libraries')->insertGetId([
-            'name' => $faker->company,
-            'address' => $faker->address,
-            'contact_number' => $faker->phoneNumber,
-        ]);
+        // Mảng lưu ID của máy tính để sử dụng cho bảng issues
+        $computerIds = [];
 
-        // Chèn vào bảng 'books' và sử dụng $libraryId
-        DB::table('books')->insert([
-            'title' => $faker->sentence,
-            'author' => $faker->name,
-            'publication_year' => $faker->year,
-            'genre' => $faker->word,
-            'library_id' => $libraryId, // Lấy ID thư viện vừa chèn
-        ]);
+        // Thêm dữ liệu vào bảng computers
+        foreach (range(1, 10) as $index) {
+            $computerId = DB::table('computers')->insertGetId([
+                'computer_name' => 'Lab-' . $faker->numberBetween(1, 100),
+                'model' => $faker->word . ' ' . $faker->randomNumber(4),
+                'operating_system' => $faker->randomElement(['Windows 10 Pro', 'Ubuntu 20.04', 'macOS Big Sur']),
+                'processor' => 'Intel Core i' . $faker->randomElement(['3', '5', '7', '9']) . '-11400',
+                'memory' => $faker->randomElement([8, 16, 32, 64]),
+                'available' => $faker->boolean,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
-        // Chèn vào bảng 'renters' và lấy ID của người thuê
-        $renterId = DB::table('renters')->insertGetId([
-            'name' => $faker->name,
-            'phone_number' => $faker->phoneNumber,
-            'email' => $faker->unique()->email,
-        ]);
+            // Lưu ID máy tính để dùng ở bảng issues
+            $computerIds[] = $computerId;
+        }
 
-        // Chèn vào bảng 'laptops' và sử dụng $renterId
-        DB::table('laptops')->insert([
-            'brand' => $faker->company,
-            'model' => $faker->word,
-            'specifications' => $faker->sentence,
-            'rental_status' => rand(0, 1),
-            'renter_id' => $renterId, // Lấy ID người thuê vừa chèn
-        ]);
-
-        // Chèn vào bảng 'it_centers'
-        $itCenterId = DB::table('it_centers')->insertGetId([
-            'name' => $faker->company,
-            'location' => $faker->address,
-            'contact_email' => $faker->unique()->email,
-        ]);
-
-        // Chèn vào bảng 'hardware_devices' và sử dụng $itCenterId
-        DB::table('hardware_devices')->insert([
-            'device_name' => $faker->word,
-            'type' => $faker->randomElement(['Mouse', 'Keyboard', 'Headset']),
-            'status' => rand(0, 1),
-            'center_id' => $itCenterId, // Lấy ID trung tâm IT vừa chèn
-        ]);
-
-        // Chèn vào bảng 'cinemas'
-        $cinemaId = DB::table('cinemas')->insertGetId([
-            'name' => $faker->company,
-            'location' => $faker->address,
-            'total_seats' => rand(100, 500),
-        ]);
-
-        // Chèn vào bảng 'movies' và sử dụng $cinemaId
-        DB::table('movies')->insert([
-            'title' => $faker->sentence,
-            'director' => $faker->name,
-            'release_date' => $faker->date,
-            'duration' => rand(60, 200),
-            'cinema_id' => $cinemaId, // Lấy ID rạp chiếu phim vừa chèn
-        ]);
+        // Thêm dữ liệu vào bảng issues
+        foreach (range(1, 20) as $index) {
+            DB::table('issues')->insert([
+                'computer_id' => $faker->randomElement($computerIds), // Chọn ngẫu nhiên ID từ bảng computers
+                'reported_by' => $faker->name,
+                'reported_date' => $faker->dateTimeThisYear(),
+                'description' => $faker->sentence(10),
+                'urgency' => $faker->randomElement(['Low', 'Medium', 'High']),
+                'status' => $faker->randomElement(['Open', 'In Progress', 'Resolved']),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
-}
-
 }
