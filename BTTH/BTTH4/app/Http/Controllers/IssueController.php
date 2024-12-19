@@ -12,25 +12,9 @@ class IssueController extends Controller
   public function index()
   {
 
-    $page = $req->page ?? 1;  // Nếu không có tham số 'page', mặc định là 1
-
-    $skip = ($page - 1) * 10;
-
-    $totalissues = Issue::count(); // Lấy tổng số bản ghi
-
-    $totalPages = ceil($totalissues / 10);
-
-
-    // Lấy toàn bộ date
     $issues = Issue::with('computer')
-      ->skip($skip)  // bỏ qua số bản ghi
-      ->take(10) //số bản ghi trả vềvề
-      ->get();
-
-    $issues->totalissues = $totalissues;
-    $issues->totalPages = $totalPages;
-    $issues->page = $page;
-
+    ->orderBy('id', 'desc') // Order by 'id' in descending order
+    ->paginate(10);
     return view('issue.index', [
       'issues' => $issues,
     ]);
@@ -68,7 +52,7 @@ class IssueController extends Controller
       'status' => $validatedData['status'],
     ]);
 
-    return redirect('/issue');
+    return redirect()->route('index')->with('success', 'thêm thành côngcông');
   }
 
   //- /issue/edit/{id} (get)
@@ -114,7 +98,7 @@ class IssueController extends Controller
 
     $issue->save();
 
-    return redirect('/issue');
+    return redirect()->route('index')->with('success', 'sửasửa thành côngcông');
   }
 
 
@@ -123,6 +107,6 @@ class IssueController extends Controller
     $issue = Issue::find($id);
 
     $issue->delete();
-    return redirect("/issue");
+    return redirect()->route('index')->with('success', 'xóa thành côngcông');
   }
 }

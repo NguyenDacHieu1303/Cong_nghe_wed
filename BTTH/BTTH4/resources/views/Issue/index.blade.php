@@ -18,18 +18,26 @@
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-10">
                             <h2>Manage <b>Isues</b></h2>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-2">
                             <a href="/issue/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>
                                 <span>Add
                                     New Isues</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger"><i class="material-icons">&#xE15C;</i>
-                                <span>Delete</span></a>
                         </div>
                     </div>
                 </div>
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if(session('fail'))
+                <div class="alert alert-fail">
+                    {{ session('fail') }}
+                </div>
+                @endif
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -65,6 +73,8 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
                                 </form>
+
+
                                 <!-- end Form xoa -->
 
 
@@ -73,22 +83,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>{{ $issues->count() }}</b> out of <b>{{ $issues->totalissues }}</b>
-                        entries</div>
-                    <ul class="pagination">
-                        <li class="page-item {{ $issues->page == 1 ? ' hidde' : '' }}">
-                            <a href="/issue?page={{ $issues->page - 1 }}" class="page-link">Previous</a>
-                        </li>
-                        @for ($i = 1; $i <= $issues->totalPages; $i++)
-                            <li class="page-item {{ $i == $issues->page ? 'active' : '' }}">
-                                <a href="/issue?page={{ $i }}" class="page-link">{{ $i }}</a>
-                            </li>
-                            @endfor
-                            <li class="page-item {{ $issues->page == $issues->totalPages ? ' hidde' : '' }}">
-                                <a href="/issue?page={{ $issues->page + 1 }}" class="page-link">Next</a>
-                            </li>
-                    </ul>
+                <div class="pagination">
+                    {{ $issues->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

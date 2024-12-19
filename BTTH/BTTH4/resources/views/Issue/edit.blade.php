@@ -108,37 +108,35 @@
 
             <div class="form-group">
                 <label for="reported_by">Người Báo Cáo:</label>
-                <input type="text" id="reported_by" name="reported_by" value="{{ old('reported_by') }}">
+                <input type="text" id="reported_by" name="reported_by" value="{{ $issue->reported_by }}">
             </div>
 
             <div class="form-group">
                 <label for="reported_date">Ngày Báo Cáo:</label>
-                <input type="datetime-local" id="reported_date" name="reported_date" value="{{ old('reported_date') }}" required>
+                <input type="datetime-local" id="reported_date" name="reported_date" value="{{ $issue->reported_date }}" required>
             </div>
 
             <div class="form-group">
                 <label for="description">Mô Tả Vấn Đề:</label>
-                <textarea id="description" name="description" rows="4" required>{{ old('description') }}</textarea>
+                <textarea id="description" name="description" rows="4" required>{{ $issue->description }}</textarea>
             </div>
 
-            <div class="combo">
-                <div class="form-group">
-                    <label for="urgency">Mức Độ:</label>
-                    <select name="urgency" id="urgency" required>
-                        <option value="Low" {{ old('urgency') == 'Low' ? 'selected' : '' }}>Thấp</option>
-                        <option value="Medium" {{ old('urgency') == 'Medium' ? 'selected' : '' }}>Trung Bình</option>
-                        <option value="High" {{ old('urgency') == 'High' ? 'selected' : '' }}>Cao</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="status">Trạng Thái:</label>
-                    <select name="status" id="status" required>
-                        <option value="Open" {{ old('status') == 'Open' ? 'selected' : '' }}>Mở</option>
-                        <option value="In Progress" {{ old('status') == 'In Progress' ? 'selected' : '' }}>Đang Xử Lý</option>
-                        <option value="Resolved" {{ old('status') == 'Resolved' ? 'selected' : '' }}>Đã Giải Quyết</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="urgency">Mức độđộ</label>
+                <select id="urgency" name="urgency" class="form-control" required>
+                    <option value="Low" {{ $issue->urgency == 'Low' ? 'selected' : '' }}>Low</option>
+                    <option value="Medium" {{ $issue->urgency == 'Medium' ? 'selected' : '' }}>Medium</option>
+                    <option value="High" {{ $issue->urgency == 'High' ? 'selected' : '' }}>High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status">Trạng thái</label>
+                <select id="status" name="status" class="form-control" required>
+                    <option value="Open" {{ $issue->status == 'Open' ? 'selected' : '' }}>Open</option>
+                    <option value="In Progress" {{ $issue->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                    <option value="Resolved" {{ $issue->status == 'Resolved' ? 'selected' : '' }}>Resolved</option>
+                    <option value="Closed" {{ $issue->status == 'Closed' ? 'selected' : '' }}>Closed</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu Vấn Đề</button>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IssueController;
 
 //- trang chu
-Route::get('/', [IssueController::class, 'index']);
+Route::get('/', [IssueController::class, 'index'])->name('index');
 
 //- /issue/create (get)
 Route::get('/issue/create', [IssueController::class, 'createIssue'])->name('createIssue');
