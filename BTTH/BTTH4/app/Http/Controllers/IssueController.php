@@ -31,7 +31,7 @@ class IssueController extends Controller
     $issues->totalPages = $totalPages;
     $issues->page = $page;
 
-    return view('index', [
+    return view('issue.index', [
       'issues' => $issues,
     ]);
   }
